@@ -64,7 +64,7 @@ class Weather extends React.Component<WeatherPageProps, void> {
 
   renderForecast = (forecast: WeatherForecast) => {
     const {
-      id, applicable_date, min_temp, max_temp, wind_speed,
+      id, applicable_date, the_temp, min_temp, max_temp, wind_speed,
       humidity, predictability, weather_state_abbr, weather_state_name
     } = forecast
     const imgUrl = `https://www.metaweather.com/static/img/weather/${weather_state_abbr}.svg`
@@ -72,6 +72,7 @@ class Weather extends React.Component<WeatherPageProps, void> {
       key: id,
       date: this.formatDate(applicable_date),
       weatherState: weather_state_name,
+      temp: this.round(the_temp),
       min: this.round(min_temp),
       max: this.round(max_temp),
       wind: this.round(wind_speed),
