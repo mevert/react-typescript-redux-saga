@@ -12,13 +12,12 @@ import {
 
 import { selectSearchText } from './selectors'
 
-// import { } from './model'
+import { City, WeatherResponse } from './model'
 
 export function* handleFetchWeather() {
   try {
-    // TODO use correct types instead of any
     const searchText = yield select(selectSearchText)
-    const cities: Array<any> = yield call(findCountry, searchText)
+    const cities: Array<City> = yield call(findCountry, searchText)
     if (cities.length > 0) {
       const { woeid, title, latt_long} = cities[0]
       const lattLongList = latt_long.split(',')
@@ -26,7 +25,7 @@ export function* handleFetchWeather() {
         lat: parseFloat(lattLongList[0]),
         lng: parseFloat(lattLongList[1])
       }
-      const { consolidated_weather }: any = yield call(getWeather, woeid)
+      const { consolidated_weather }: WeatherResponse = yield call(getWeather, woeid)
       yield put(fetchWeatherSuccess({
         title,
         lattLong,

@@ -2,9 +2,10 @@ import * as React from 'react'
 import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps'
 import Loader from '../Loader'
 import Container from './Container'
+import { LatLong } from '../../containers/Weather/model'
 
 interface MapProps extends React.Props<Location> {
-  latLong?: any
+  latLong?: LatLong
 }
 
 const googleMapURL =

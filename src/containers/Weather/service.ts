@@ -6,7 +6,7 @@ export const findCountry = (country: string) => {
     .then(result => result)
 }
 
-export const getWeather = (id: string) => {
+export const getWeather = (id: number) => {
   return fetch(`/api/location/${id}/`)
     .then(res => {
       return res.json()

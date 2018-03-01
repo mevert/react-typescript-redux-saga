@@ -1,19 +1,17 @@
 import { createAction } from 'redux-actions'
 import { actionTypes as at } from './constants'
-// import { User } from './model'
+import { Forecast } from './model'
 
 const changeSearchText = createAction(
   at.WEATHER_CHANGE_SEARCH_TEXT,
   (text: string) => text
 )
 
-const fetchWeather = createAction(
-  at.WEATHER_FETCH
-)
+const fetchWeather = createAction(at.WEATHER_FETCH)
 
 const fetchWeatherSuccess = createAction(
   at.WEATHER_FETCH_SUCCESS,
-  (forecasts: any) => forecasts // YODO add correct types
+  (forecast: Forecast) => forecast
 )
 
 const fetchWeatherFail = createAction(

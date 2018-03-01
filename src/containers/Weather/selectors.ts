@@ -1,13 +1,18 @@
 import { createSelector } from 'reselect'
+import {
+  RootState,
+  WeatherState,
+  Forecast
+} from './model'
 
-const selectWeatherDomain = (state: any) => state.weatherReducer // TODO add correct types
-const selectSearchText = createSelector(selectWeatherDomain, (weather: any) => weather.searchText)
-const selectForecast = createSelector(selectWeatherDomain, (weather: any) => weather.forecast)
-const selectForecasts = createSelector(selectForecast, (forecast: any) => forecast.consolidated_weather)
-const selectCity = createSelector(selectForecast, (forecast: any) => forecast.title)
-const selectLatLng = createSelector(selectForecast, (forecast: any) => forecast.lattLong)
-const selectErrorMessage = createSelector(selectWeatherDomain, (weather: any) => weather.errorMessage)
-const selectIsLoading = createSelector(selectWeatherDomain, (weather: any) => weather.isLoading)
+const selectWeatherDomain = (state: RootState) => state.weatherReducer
+const selectSearchText = createSelector(selectWeatherDomain, (weather: WeatherState) => weather.searchText)
+const selectForecast = createSelector(selectWeatherDomain, (weather: WeatherState) => weather.forecast)
+const selectForecasts = createSelector(selectForecast, (forecast: Forecast) => forecast.consolidated_weather)
+const selectCity = createSelector(selectForecast, (forecast: Forecast) => forecast.title)
+const selectLatLng = createSelector(selectForecast, (forecast: Forecast) => forecast.lattLong)
+const selectErrorMessage = createSelector(selectWeatherDomain, (weather: WeatherState) => weather.errorMessage)
+const selectIsLoading = createSelector(selectWeatherDomain, (weather: WeatherState) => weather.isLoading)
 
 export {
   selectSearchText,
