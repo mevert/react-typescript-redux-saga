@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions'
 import { actionTypes as at } from './constants'
-import { WeatherAction } from './model'
+import { WeatherAction, WeatherState } from './model'
 
-const initialState = {
+const initialState: WeatherState = {
   searchText: 'Helsinki',
   errorMessage: undefined,
   isLoading: false,
@@ -11,7 +11,7 @@ const initialState = {
 
 const weather = handleActions(
   {
-    [at.WEATHER_CHANGE_SEARCH_TEXT]: (state, action: WeatherAction) => { // TODO refactor
+    [at.WEATHER_CHANGE_SEARCH_TEXT]: (state, action: WeatherAction) => {
       return {
         ...state,
         searchText: action.payload

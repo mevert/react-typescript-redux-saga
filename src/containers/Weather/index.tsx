@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Dispatch } from 'redux'
 const connect = require('react-redux').connect
 import {
   changeSearchText,
@@ -25,12 +26,18 @@ import Button from '../../components/Button'
 import Forecast from '../../components/Forecast'
 import Location from '../../components/Location'
 
+import {
+  Weather as WeatherForecast,
+  RootState,
+  LatLong
+} from './model'
+
 interface WeatherPageProps extends React.Props<Weather> {
-  forecasts: Array<any>
+  forecasts: Array<WeatherForecast>
   errorMessage: string
   city: string
   isLoading: boolean
-  latLng: any
+  latLng: LatLong
   getWeather: () => void
   changeSearchText: (text: string) => Promise<void>
 }
@@ -41,7 +48,7 @@ class Weather extends React.Component<WeatherPageProps, void> {
     this.props.getWeather()
   }
 
-  handleTextFieldKeyDown = (e: any) => { // TODO set correct type
+  handleTextFieldKeyDown = (e: any) => {
     if (e.key === 'Enter') {
       this.props.getWeather()
     }
@@ -55,7 +62,7 @@ class Weather extends React.Component<WeatherPageProps, void> {
 
   formatDate = (date: string) => (new Date(date).toDateString())
 
-  renderForecast = (forecast: any) => {
+  renderForecast = (forecast: WeatherForecast) => {
     const {
       id, applicable_date, min_temp, max_temp, wind_speed,
       humidity, predictability, weather_state_abbr, weather_state_name
@@ -114,7 +121,7 @@ class Weather extends React.Component<WeatherPageProps, void> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     forecasts: selectForecasts(state),
     city: selectCity(state),
@@ -124,7 +131,7 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Dispatch<RootState>) {
   return {
     changeSearchText: (text: string) => {
       dispatch(changeSearchText(text))
